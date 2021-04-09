@@ -29,3 +29,19 @@ btnScrollTo.addEventListener("click", function (e) {
 
   section1.scrollIntoView({ behavior: "smooth" });
 });
+
+document.querySelectorAll(".nav__link").forEach(function (el) {
+  el.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (e.target.classList.contains("nav__link")) {
+      const id = e.target.getAttribute("href");
+      document.querySelector(id).scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  });
+});
+
+const h1 = document.querySelector("h1");
+
+h1.closest("header").style.background = "skyblue";
