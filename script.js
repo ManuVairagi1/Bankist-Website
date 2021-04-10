@@ -44,4 +44,29 @@ document.querySelectorAll(".nav__link").forEach(function (el) {
 
 const h1 = document.querySelector("h1");
 
-h1.closest("header").style.background = "skyblue";
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabsContent = document.querySelectorAll(".operations__content");
+
+// tabs.forEach((t) => t.addEventListener("click", () => console.log("hello")));
+// this creates copies , what if there are 300 tabs , you definately don't want to make a copy for this
+
+//thats why we use event delegation , Bhery Bhery IMP
+
+tabsContainer.addEventListener("click", function (e) {
+  e.preventDefault();
+  const clicked = e.target.closest(".operations__tab");
+
+  if (!clicked) return;
+
+  tabs.forEach((t) => t.classList.remove("operations__tab--active"));
+  clicked.classList.add("operations__tab--active");
+
+  //activating the content area
+
+  tabsContent.forEach((c) => c.classList.remove("operations__content--active"));
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add("operations__content--active");
+});
